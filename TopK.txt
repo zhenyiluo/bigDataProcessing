@@ -1,0 +1,10 @@
+You have 10 miillion search terms, a lot of them are duplicated, there are at most 3 million distinct search terms, find the top 10 frequent search terms, the momory limit is 1G. Each term has 1 to 255 bytes.
+
+A:
+1G = 2^ 30 bytes.
+2^30 / 2^8 = 2^22 = 4 million
+Build a hashmap, the key is the search term, the value is how many times the key has appeared. The size of the hash map is at most 3 million.
+
+Use a fixed size min heap to record the top 10 keys. time complexity is O(n log 10).
+
+Use modified quick search (compare and swap), time complexity is O(n).
