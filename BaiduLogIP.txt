@@ -1,0 +1,20 @@
+In Baidu servers' log, find the ip that visit www.baidu.com most times in a single day.
+
+A:
+Consider input is a set of files, could also be converted to Set<String>, suppose the size of this set is m,
+due to single machine's memory limitation, we might need to divide the set to smaller sizes n.
+
+Assume all the ip addresses are ipv4 first, 32 bit. 
+
+Build a Hashmap<String, Integer> for each single machine to process the n set of input files, record how many times each ip address has appeard.
+
+Aggregation: Build a final HashMap, aggregate all the results from those single machines. And find the key that has the biggest value.
+
+Optimization: How about each single machine can not build a hashmap that has size 2^32?
+
+A:
+Use a mask (ex. 1111) to filter the input to 16 buckets for each single machine, process each buckets' input one by one, then only need to build a hashmap that has size 2^28 on a singl machine. Aggregate all the results across all the nodes for each bucket.
+
+Other thoughts:
+The original input file might be a super large file instead of a set of files. 
+Divide the large file into small set of files according to hash(ip) % 1000, for each small file, use hashmap to get record how many times each ip has appeard, find the ip that has largest counts, and then find the most frequent ip among the 1000 high frequent ips.
