@@ -1,0 +1,15 @@
+Give you one file has 1GB, every line in this file is a word, each word size is not larger than 16Bytes (in java, less than 4 letters.) You have 1MB memory, please return the top 100 words that has repeated most frequent in the file.
+
+1GB = 1024 MB
+
+Hash the words in the file to 1024 small files ? How about all the word in the file are the same?
+
+Other thoughts:
+hash(x) % 5000 => 200k 
+if for some files, still larger than 1MB, hash(x) % 10000... continue divide.
+
+Use TreeMap to record how many times each word has appeared in each file, get top100 for each small file.
+Use min heap to merge the results across all the files.
+
+How about if a single word can not fit into 1MB file? (PreProcess)
+For those small set of files, use election algorithm to select the most frequent word, remove them from the file, and put the key-value pair of that word in the minHeap. Until all the files could be divided into files that are smaller than 1MB.
